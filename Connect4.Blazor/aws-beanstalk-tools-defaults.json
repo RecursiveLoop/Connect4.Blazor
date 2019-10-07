@@ -3,10 +3,17 @@
     "comment" : "This file is used to help set default values when using the dotnet CLI extension Amazon.ElasticBeanstalk.Tools. For more information run \"dotnet eb --help\" from the project root.",
     "profile" : "default",
     "region"  : "ap-southeast-1",
-    "application" : "BlazorApp1",
-    "environment" : "BlazorApp1-dev",
+    "application" : "Connect4Blazor",
+    "environment" : "Connect4Blazor-dev",
     "health-check-url" : "/",
     "iis-website"      : "Default Web Site",
     "app-path"         : "/",
-    "enable-xray"      : true
+    "enable-xray"      : true,
+    "cname"            : "connect4blazor-dev",
+    "solution-stack"   : "64bit Windows Server 2016 v2.2.2 running IIS 10.0",
+    "environment-type" : "LoadBalanced",
+    "instance-profile" : "aws-elasticbeanstalk-ec2-role",
+    "service-role"     : "aws-elasticbeanstalk-service-role",
+    "instance-type"    : "m5.large",
+    "key-pair"         : "Elgin-SG-Nov-2018"
 }
