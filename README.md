@@ -12,10 +12,6 @@ The Connect4 game implemented with ASP.NET Blazor
 
 - Visual Studio or Visual Studio Code for development
 
-# Give it a try
-
-Code is currently being continuously deployed to Amazon Elastic Beanstalk at http://connect4blazor-dev.ap-southeast-1.elasticbeanstalk.com/
-
 # Deployment Instructions
 
 - Open solution from Connect4.Blazor\Connect4.Blazor.sln
