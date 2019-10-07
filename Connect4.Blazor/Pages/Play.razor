@@ -1,0 +1,83 @@
+﻿@page  "/play"
+@inject HttpClient Http
+
+<h3>Play Connect4</h3>
+<table style="margin:50px;">
+    @for (int j = (game.Board.Height-1); j >=0; j--)
+    {
+    <tr>
+        @for (int k = 0; k < game.Board.Width; k++)
+        {
+       
+            int a=k;
+            int b=j;
+       
+        <td style="vertical-align:middle; text-align:center;width:50px;height:50px;border:solid;border-width:2px;">
+            @if (game.Board.Discs[a,b]!=null)
+            {
+            var disc=game.Board.Discs[a,b];
+            if (disc.Side==Logic.Enums.Sides.Red)
+            {
+            <button style="width:50px;height:50px;background-color:red;color:black;" class="btn btn-primary" @onclick="@(e => BoardClicked(a, b))">O</button>
+            }
+            else
+            {
+            <button style="width:50px;height:50px;background-color:yellow;color:black;" class="btn btn-primary" @onclick="@(e => BoardClicked(a, b))">X</button>
+            }
+
+            }
+            else
+            {
+            <button  style="width:50px;height:50px;background-color:white;"  @onclick="@(e => BoardClicked(a, b))"></button>
+            }
+        </td>
+        
+        }
+    </tr>
+    }
+</table>
+<button class="btn btn-primary" @onclick="ResetGame">Reset Game</button>
+<div style="height:50px;"></div>
+<h3>@GetGameStateString(game.CurrentState)</h3>
+
+
+@code {
+
+    Connect4.Logic.Game game = null;
+
+ protected override async Task OnInitializedAsync()
+    {
+        game = new Connect4.Logic.Game(10,10);
+    }
+
+    void BoardClicked(int X,int Y)
+    {
+        Connect4.Logic.Disc newDisc=null;
+        if (game.CurrentState == Logic.Enums.GameStates.RedsTurn)
+            newDisc = new Logic.Disc(Logic.Enums.Sides.Red);
+        else if (game.CurrentState == Logic.Enums.GameStates.YellowsTurn)
+            newDisc = new Logic.Disc(Logic.Enums.Sides.Yellow);
+
+        if (newDisc != null)
+            game.AddDisc(newDisc, X);
+    }
+
+    string GetGameStateString(Logic.Enums.GameStates currentState)
+    {
+        if (currentState==Logic.Enums.GameStates.YellowsTurn)
+            return "Yellow's Turn";
+        else if (currentState==Logic.Enums.GameStates.RedsTurn)
+            return "Red's Turn";
+          else if (currentState==Logic.Enums.GameStates.Draw)
+            return "Draw";
+  else if (currentState==Logic.Enums.GameStates.RedWins)
+            return "Red Wins!";
+        else
+            return "Yellow Wins!";
+    }
+
+    void ResetGame()
+    {
+        game.Reset();
+    }
+}
